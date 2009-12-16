@@ -1,0 +1,46 @@
+MMValidation is a category on NSObject that gives you validation functionality similar to the declarative style of Ruby on Rails.  
+
+MMValidation is freely distributable under the terms of the MIT license.
+
+INSTALLATION
+
+To install in your project, simply copy the following files into your project:
+
+- MMValidation.h
+- MMValidation.m
+- MMValidationError.h
+- MMValidationError.m
+- NSObject+MMValidation.h
+- NSObject+MMValidation.m
+
+USAGE
+
+First, import MMValidation in the class you want to validate:
+
+#import "NSObject+MMValidation.h"
+
+Then, override the +(void)initialize method:
+
++(void)initialize {
+	[MyClass validatesPresenceOf:@"city"];
+	[MyClass validatesPresenceOf:@"state"];
+}
+
+You can declare your validations elsewhere if you like, but +(void)initialize is a good place because it's declarative and is only called once.
+
+Once your validations are declared, you can check for object validity with the valid message.
+
+NSMutableArray *errors = nil;
+if ([myObject valid:&errors]) {
+	// yay!  proceed as planned
+} else {
+	// handle the validation errors.  error objects contain the member name and an error message
+}
+
+The errors argument is optional, but useful if you would like details about which validations failed.
+
+For a list of all available validations, look at NSObject+MMValidation.h
+
+For detailed usage, look at the example code.
+
+Mike Mayo - greenisus@gmail.com - http://overhrd.com - Twitter: @greenisus
